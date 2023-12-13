@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Groupe Forum</title>
+        <link href="static/base.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body style="background-color: black;">
+        <!-- Start of Navbar -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="color:white" href="/main">Groupes</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" style="color:white" href="/main">Home</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <a class="btn btn-outline-success"  style="color:white" href="{{url_for('logout')}}">Logout</a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Start of Form -->
+        <div style="background-color: black" class="container">
+        <!-- Forum Nav -->
+            <h1 class="my-4 fs-3 text" style="color:white">{{topic.id}}. Welcome to the Forum: {{topic.title}}!</h1>
+            <div class="my-3 p-3 rounded" style="background-color: black">
+
+                <div class="d-flex text-body-secondary pt-3" style="background-color: black">
+                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                    <p class="pb-3 mb-0 small lh-sm border-bottom" style="background-color: black; color:white">
+                        {{topic.desc}}
+                    </p>
+                </div>
+
+                <div class="my-3 p-3 rounded" style="background-color: black">
+                    <h6 class="border-bottom pb-2 mb-0" style="color:white; background-color: black">Comments ({{comments|length}})</h6>
+                    {% for comment in comments %}
+                    <div class="d-flex text-body-secondary pt-3" style="background-color: black">
+                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                            <div class="d-flex justify-content-between">
+                                <strong class="text-gray-dark" style="color:white; background-color: black">@User</strong>
+                            </div>
+                            <span class="d-block" style="color:white; background-color: black">{{comment.txtcmt}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <h1 class="my-4 fs-4 text" style="color:white; background-color: black">Interact with the Groupe!</h1>
+                <form action="/topic/{{topic.id}}" method="post">
+                    <div class="mb-3">
+                        <label for="title" class="form-label" style="color:white; background-color: black">Comment</label>
+                        <input type="text" name="comment" class="form-control" id="comment" aria-describedby="emailHelp">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="color:white; background-color: black">Submit</button>
+                </form>
+            </div>
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>
+<!-- Some code from Bootstrap - Heavily edited to work with original code -->
